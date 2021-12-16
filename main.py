@@ -26,6 +26,13 @@ def hard_reset_sections():
     sections.insert(0, new_list)
 
 
+""" check lines for 3 consecutive symbols of the same type """
+def check_lines():
+    if sections[0] and sections[1] and sections[2] == value_X:
+        print(colored('WINNER!', 'red' ,on_color='on_white', attrs=['bold']))
+        return True
+
+
 def user_turn() -> None:
     turn_count = 1
     while True:
@@ -41,15 +48,19 @@ def user_turn() -> None:
         if user_input in sections:
             sections.pop(user_input)
             if turn_count%2 == 0:
-                sections.insert(user_input, 'O')
+                value_O = colored('O','red', attrs=['bold'])
+                sections.insert(user_input, value_O)
             else:
-                sections.insert(user_input, 'X')
+                global value_X
+                value_X = colored('X','magenta', attrs=['bold'])
+                sections.insert(user_input, value_X)
             # if turn_count%2 == 0:
             #     sections.insert(user_input, 'O')
             # elif turn_count%2 != 0:
             #     sections.insert(user_input, 'X')
+        if check_lines() == True:
+            break
         turn_count = turn_count + 1 
 
 
 user_turn()
-print(sections)

@@ -1,0 +1,11 @@
+
+
+
+16/12/2021
+- Alternating symbols (X and 0) are now working in correspondance with turn count
+- X and 0 are now different colors
+- Print out winner based on top horizontal line (testing)
+    - Issue with check_lines function not accepting 'X' as boolean value.
+    This was because the use of colored() in the insertion method made the character inserted
+    into an object rather than a string. Therefore, bool couldn't math string. Rather, had to make 
+    value_O and value_X globals and assign to conditional in check_lines()
