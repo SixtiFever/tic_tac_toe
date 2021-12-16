@@ -40,7 +40,10 @@ def user_turn() -> None:
         #     user_input = input(colored('Section in use... try again', 'red', 'on_white', attrs=['bold']))
         if user_input in sections:
             sections.pop(user_input)
-            sections.insert(user_input, 'X')
+            if turn_count%2 == 0:
+                sections.insert(user_input, 'O')
+            else:
+                sections.insert(user_input, 'X')
             # if turn_count%2 == 0:
             #     sections.insert(user_input, 'O')
             # elif turn_count%2 != 0:
