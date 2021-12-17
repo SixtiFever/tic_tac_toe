@@ -9,3 +9,11 @@
     This was because the use of colored() in the insertion method made the character inserted
     into an object rather than a string. Therefore, bool couldn't math string. Rather, had to make 
     value_O and value_X globals and assign to conditional in check_lines()
+
+- Issues:
+    - check_lines():
+        - user input has to follow the 'if' conditional order set in code. E.g if user input is in sections
+        0,2 --> Winner will be announced due to execution bypassing the 1 conditional.
+- Solution:
+    - Was being really stupid. Replaced and with == --> Problem solved. Duh!
+

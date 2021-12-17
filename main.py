@@ -28,39 +28,59 @@ def hard_reset_sections():
 
 """ check lines for 3 consecutive symbols of the same type """
 def check_lines():
-    if sections[0] and sections[1] and sections[2] == value_X:
+    # top row
+    if sections[0] == sections[1] == sections[2]:
+        print(colored('WINNER!', 'red' ,on_color='on_white', attrs=['bold']))
+        return True
+    # middle row
+    if sections[3] == sections[4] == sections[5]:
+        print(colored('WINNER!', 'red' ,on_color='on_white', attrs=['bold']))
+        return True
+    # bottom row
+    if sections[6] == sections[7] == sections[8]:
+        print(colored('WINNER!', 'red' ,on_color='on_white', attrs=['bold']))
+        return True
+    # left col
+    if sections[0] == sections[3] == sections[6]:
+        print(colored('WINNER!', 'red' ,on_color='on_white', attrs=['bold']))
+        return True
+    # mid col
+    if sections[1] == sections[4] == sections[7]:
+        print(colored('WINNER!', 'red' ,on_color='on_white', attrs=['bold']))
+        return True
+    # right col
+    if sections[2] == sections[5] == sections[8]:
+        print(colored('WINNER!', 'red' ,on_color='on_white', attrs=['bold']))
+        return True
+    # diagonal 1
+    if sections[0] == sections[4] == sections[8]:
+        print(colored('WINNER!', 'red' ,on_color='on_white', attrs=['bold']))
+        return True
+    # diagonal 2
+    if sections[2] == sections[4] == sections[6]:
         print(colored('WINNER!', 'red' ,on_color='on_white', attrs=['bold']))
         return True
 
 
-def user_turn() -> None:
+def play_game() -> None:
     turn_count = 1
     while True:
         ready_template()
+        if check_lines() == True:
+                break
         user_input = int(input('Place symbol in section: ')) # Change symbol to either X or O based on turn
-        # if user_input == 'hardreset':
-        #     hard_reset_sections()
-        #     continue
-        # else:
-        #     user_input = int(user_input)
-        # if user_input not in sections:
-        #     user_input = input(colored('Section in use... try again', 'red', 'on_white', attrs=['bold']))
+
+        # placing user input in list
         if user_input in sections:
             sections.pop(user_input)
-            if turn_count%2 == 0:
+            if turn_count%2 == 0: # setting O's to player 2 (even turn count)
                 value_O = colored('O','red', attrs=['bold'])
                 sections.insert(user_input, value_O)
             else:
                 global value_X
                 value_X = colored('X','magenta', attrs=['bold'])
                 sections.insert(user_input, value_X)
-            # if turn_count%2 == 0:
-            #     sections.insert(user_input, 'O')
-            # elif turn_count%2 != 0:
-            #     sections.insert(user_input, 'X')
-        if check_lines() == True:
-            break
         turn_count = turn_count + 1 
 
 
-user_turn()
+play_game()
