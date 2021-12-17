@@ -1,5 +1,11 @@
 from termcolor import colored
+from PIL import Image
 
+
+""" image open upon winning """
+winner_image = Image.open('winner.jpeg')
+
+""" list where each element maps to a grid section """
 sections = [0,1,2,3,4,5,6,7,8]
 
 
@@ -16,14 +22,6 @@ def ready_template() -> None:
     print('     |     |     ')
     return None
 
-
-""" hard reset the sections list --> type 'hardreset' into first user_turn input 
-needed if want to start a new game half way through or if you need to reset the section 
-values for any reason """
-def hard_reset_sections():
-    sections.clear()
-    new_list = [x for x in range(0,9)]
-    sections.insert(0, new_list)
 
 
 """ check lines for 3 consecutive symbols of the same type """
@@ -65,6 +63,7 @@ def check_lines():
 def play_game() -> None:
     turn_count = 1
     while True:
+
         ready_template()
         if check_lines() == True:
                 break
@@ -81,6 +80,7 @@ def play_game() -> None:
                 value_X = colored('X','magenta', attrs=['bold'])
                 sections.insert(user_input, value_X)
         turn_count = turn_count + 1 
+    winner_image.show()
 
 
 play_game()
